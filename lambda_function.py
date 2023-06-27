@@ -58,7 +58,7 @@ def lambda_handler(event, context):
   elif httpMethod == getMethod and path.startswith(getProductsPath):
     response = getProducts(event["queryStringParameters"]["limit"])
   else: 
-    response = buildResponse(404, "Not Found")
+    response = buildResponse(405, "Method Not Allowed")
   return response
 
 # Create user
