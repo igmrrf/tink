@@ -1,189 +1,291 @@
-# tink
-AWS Lambda, API GateWay and DynomoDB
-## TINKOKO MARKET PLACE BACKEND TECHNICAL INTERVIEW TEST
+# TINKOKO MARKET PLACE
 
-### Using the aws lambda function,dynamodb and api gateway develop the following Rest api endpoints:
+### Using the AWS Lambda Function,Dynamodb and API Gateway
 
-#### /create-user (Creating a new user)
-#### Request Payload:
+<br>
+
+## CREATE USER
+
+#### Endpoint: /create-user
+
+### Logic:
+
+Gets user information from payload, and checks if an existing user with the payload username exists, if user exists, returns a 400 "Bad Request" response else, creates a user and assigns a unique Id.
+
+#### Method: POST
+
+#### Request Body:
+
 ```
     {
-    "activateUser": false,
-    "currency": "NGN",
-    "lastName": "Lamidi ",
-    "email": "lamiditemitope31@email.com" ,
-    "firstName": "Temitope ",
-    "phone": "7043330737",
-    "role": [buyer / seller],
-    "userName": "temi247",
-    }
-```
-#### Response Payload
-```
-    {
-    "id" "h3fons893dfjg944ff" [partion key -pk]
-    "activateUser": false,
-    "createdAt": "1667213189880",
-    "currency": "NGN",
-    "lastName": "Lamidi ",
-    "email": "lamiditemitope31@email.com" ,
-    "firstName": "Temitope ",
-    "phone": "7043330737",
-    "role": [buyer / seller],
-    "userId": "temi247",
+        "activateUser": false,
+        "currency": "NGN",
+        "lastName": "Lamidi ",
+        "email": "lamiditemitope31@email.com" ,
+        "firstName": "Temitope ",
+        "phone": "7043330737",
+        "role": "seller",
+        "userName": "temi247",
     }
 ```
 
-#### /create-product (Creating a new product)
-#### Request Payload:
+#### Response Body
+
 ```
     {
-    "category": "627cc555046919d2a6f21662",
-    "city": "Abuja",
-    "count": 10,
-    "country": "Nigeria",
-    "description": "Banana Flavour Minimum Order Quantity - 10pcs",
-    "images": [
-    {
-    "public_id": "n4t5ccur0shvzrnwlkoy",
-    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
-    }
-    ],
-    "price": "1000",
-    "productName": "L&Z Yoghurt ",
-    "quantity": 100,
-    "subCategory": "hLBxpm6XoCWvhQQdsmRjQPZL",
-    "sellerId": "634084c8fd2c16ba75c006e8",
-    "weight": "500"
+        "id" "9875ba36-a206-4c5b-a7ce-179fe9f75211",
+        "activateUser": false,
+        "createdAt": "1667213189880",
+        "currency": "NGN",
+        "lastName": "Lamidi ",
+        "email": "lamiditemitope31@email.com" ,
+        "firstName": "Temitope ",
+        "phone": "7043330737",
+        "role": "seller",
+        "userId": "temi247",
     }
 ```
-#### Response Payload:
+
+<br>
+
+## CREATE PRODUCT
+
+#### Endpoint: /create-product
+
+### Logic:
+
+Gets product information from payload, and checks if an creator is a seller, if creator is a not a seller, returns a 400 "Bad Request" response else, creates a product and assigns a unique Id.
+
+#### Method: POST
+
+#### Request Body:
+
 ```
     {
-    "id": "SaiUFv2oJurhMWq92VAesQKF", [pk],
-    "category": "627cc555046919d2a6f21662",
-    "city": "Abuja",
-    "count": 10,
-    "country": "Nigeria",
-    "createdAt": "1685421412232",
-    "description": "Banana Flavour Minimum Order Quantity - 10pcs",
-    "images": [
-    {
-    "public_id": "n4t5ccur0shvzrnwlkoy",
-    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
-    }
-    ],
-    "price": "1000",
-    "productName": "L&Z Yoghurt ",
-    "quantity": 100,
-    "subCategory": "hLBxpm6XoCWvhQQdsmRjQPZL",
-    "sellerId": "634084c8fd2c16ba75c006e8",
-    "weight": "500"
+        "category": "627cc555046919d2a6f21662",
+        "city": "Abuja",
+        "count": 10,
+        "country": "Nigeria",
+        "description": "Banana Flavour Minimum Order Quantity - 10pcs",
+        "images": [
+        {
+        "public_id": "n4t5ccur0shvzrnwlkoy",
+        "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
+        }
+        ],
+        "price": "1000",
+        "productName": "L&Z Yoghurt ",
+        "quantity": 100,
+        "subCategory": "hLBxpm6XoCWvhQQdsmRjQPZL",
+        "sellerId": "875ba36-a206-4c5b-a7ce-179fe9f75211",
+        "weight": "500"
     }
 ```
-#### /get-user/[:id] (get a user record using the unique id )
+
+#### Response Body:
+
+```
+    {
+        "id": "SaiUFv2oJurhMWq92VAesQKF", [pk],
+        "category": "627cc555046919d2a6f21662",
+        "city": "Abuja",
+        "count": 10,
+        "country": "Nigeria",
+        "createdAt": "1685421412232",
+        "description": "Banana Flavour Minimum Order Quantity - 10pcs",
+        "images": [
+        {
+        "public_id": "n4t5ccur0shvzrnwlkoy",
+        "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
+        }
+        ],
+        "price": "1000",
+        "productName": "L&Z Yoghurt ",
+        "quantity": 100,
+        "subCategory": "hLBxpm6XoCWvhQQdsmRjQPZL",
+        "sellerId": "634084c8fd2c16ba75c006e8",
+        "weight": "500"
+    }
+```
+
+<br>
+
+## GET USER BY ID (get a user record using the unique id )
+
+#### Endpoint: /get-user/[:id]
+
+### Logic:
+
+Gets user by partition key
+
+#### Method: GET
+
+#### Response Body
+
+```
+    {
+        "id" "9875ba36-a206-4c5b-a7ce-179fe9f75211",
+        "activateUser": false,
+        "createdAt": "1667213189880",
+        "currency": "NGN",
+        "lastName": "Lamidi ",
+        "email": "lamiditemitope31@email.com" ,
+        "firstName": "Temitope ",
+        "phone": "7043330737",
+        "role": "seller",
+        "userId": "temi247",
+    }
+```
 
 #### /get-user/[:user-name] (get a user record using the userName attribute )
 
-#### /update-user/[:id] (update a user record)
-#### Request Payload:
+## GET USER BY USERNAME (get a user record using the username )
+
+#### Endpoint: /get-user?username=[:username]
+
+### Logic:
+
+Gets user by index key userId (username)
+
+#### Method: GET
+
+#### Response Body
+
 ```
     {
-    "photo": [
-    {
-    "public_id": "n4t5ccur0shvzrnwlkoy",
-    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
-    }
-    ],
-    "verificationMeans": "National ID"
-    "idNumber": "0257248879HGT"
-    }
-```
-#### Response Payload:
-```
-    {
-    "id" "h3fons893dfjg944ff" [partion key -pk]
-    "activateUser": false,
-    "createdAt": "1667213189880",
-    "currency": "NGN",
-    "lastName": "Lamidi ",
-    "email": "lamiditemitope31@email.com" ,
-    "firstName": "Temitope ",
-    "phone": "7043330737",
-    "role": [buyer / seller],
-    "userId": "temi247",
-    "photo": [
-    {
-    "public_id": "n4t5ccur0shvzrnwlkoy",
-    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
-    }
-    ],
-    "verificationMeans": "National ID"
-    "idNumber": "0257248879HGT"
+        "id" "9875ba36-a206-4c5b-a7ce-179fe9f75211",
+        "activateUser": false,
+        "createdAt": "1667213189880",
+        "currency": "NGN",
+        "lastName": "Lamidi ",
+        "email": "lamiditemitope31@email.com" ,
+        "firstName": "Temitope ",
+        "phone": "7043330737",
+        "role": "seller",
+        "userId": "temi247",
     }
 ```
-#### /list-product (get list of product; Limits=10)
-##### Use the sellerId attached to each product to get the seller info (i.e firstName, lastName, userName and profilePic) before returning the list
-#### Response Payload:
+
+<br>
+
+## UPDATE USER BY ID
+
+#### Endpoint: /update-user/[:id]
+
+### Logic:
+
+Update user with unique Id provided in the path parameters from request body provided.
+
+#### Method: PATCH
+
+#### Request Body:
+
 ```
     {
-    "LastEvaluatedKey": {
-        "id": "633192b485f761e0d94b2bfd"
-    },
-    "statusCode": 200,
-    "length": 10,
-    "items": [
-        {
-            "productName": "Irish Potatoes",
-            
-            "category": "627cc5f7046919d2a6f2167d",
-            "createdAt": "1663787083980",
-            "images": [
-                {
-                    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
-                    "public_id": "1663787064948"
-                }
-            ],
-            "sellerId": "632ab45bca9584f349e7f0e1",
-            "productId": "632b604b0da9bd1d419a07db",
-            "posterInfo": {
-                "role": "seller",
-                "firstName": "Yakubu",
-                "lastName": "Rimamnungra",
-                "profilePicUrl": "N/A"
+        "photo": [
+            {
+            "public_id": "n4t5ccur0shvzrnwlkoy",
+            "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
             }
+        ],
+        "verificationMeans": "National ID"
+        "idNumber": "0257248879HGT"
+    }
+```
+
+#### Response Body:
+
+```
+    {
+        "id" "h3fons893dfjg944ff"
+        "activateUser": false,
+        "createdAt": "1667213189880",
+        "currency": "NGN",
+        "lastName": "Lamidi ",
+        "email": "lamiditemitope31@email.com" ,
+        "firstName": "Temitope ",
+        "phone": "7043330737",
+        "role": [buyer / seller],
+        "userId": "temi247",
+        "photo": [
+            {
+            "public_id": "n4t5ccur0shvzrnwlkoy",
+            "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1685421283/n4t5ccur0shvzrnwlkoy.jpg"
+            }
+        ],
+        "verificationMeans": "National ID"
+        "idNumber": "0257248879HGT"
+    }
+```
+
+<br>
+
+## GET PRODUCTS LISTED
+
+#### Endpoint: /list-product?limit=10
+
+### Logic:
+
+Gets products listed and populate the seller information into "posterInfo"
+
+#### Method: GET
+
+#### Response Body:
+
+```
+    {
+        "LastEvaluatedKey": {
+            "id": "633192b485f761e0d94b2bfd"
         },
-        {
-            "productName": "Brown Rabbit",
-            
-            "category": "627cc5f7046919d2a6f2167d",
-            "createdAt": "1663787083980",
-            "images": [
-                {
-                    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
-                    "public_id": "1663787064948"
+        "statusCode": 200,
+        "length": 10,
+        "items": [
+            {
+                "productName": "Irish Potatoes",
+
+                "category": "627cc5f7046919d2a6f2167d",
+                "createdAt": "1663787083980",
+                "images": [
+                    {
+                        "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
+                        "public_id": "1663787064948"
+                    }
+                ],
+                "sellerId": "632ab45bca9584f349e7f0e1",
+                "productId": "632b604b0da9bd1d419a07db",
+                "posterInfo": {
+                    "role": "seller",
+                    "firstName": "Yakubu",
+                    "lastName": "Rimamnungra",
+                    "profilePicUrl": "N/A"
                 }
-            ],
-            "sellerId": "632ab45bca9584f349e7f0e1",
-            "productId": "632b604b0da9bd1d419a07db",
-            "posterInfo": {
-                "role": "seller",
-                "firstName": "Ajayi",
-                "lastName": "Rafel",
-                "profilePicUrl": [
-                {
-                    "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
-                    "public_id": "1663787064948"
+            },
+            {
+                "productName": "Brown Rabbit",
+
+                "category": "627cc5f7046919d2a6f2167d",
+                "createdAt": "1663787083980",
+                "images": [
+                    {
+                        "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
+                        "public_id": "1663787064948"
+                    }
+                ],
+                "sellerId": "632ab45bca9584f349e7f0e1",
+                "productId": "632b604b0da9bd1d419a07db",
+                "posterInfo": {
+                    "role": "seller",
+                    "firstName": "Ajayi",
+                    "lastName": "Rafel",
+                    "profilePicUrl": [
+                    {
+                        "url": "https://res.cloudinary.com/tinkokooffice/image/upload/v1663787065/1663787064948.jpg",
+                        "public_id": "1663787064948"
+                    }
+                ],
                 }
-            ],
             }
-        }
-        
-    ]
-}
+
+        ]
+    }
 ```
-### Programming language: Python (Most preferred) or Node.js
-
-#### SUBMISSION: Create a GitHub repo (and the link is to be forwarded to this email: Tinkokogroup101@gmail.com ) to document all the apis. This doucmentation should contain neccessary info like the logic, api endpoint, payloads and http method for each api. You can reach us for more clarity or explanation at any point. This assessment is to be completed under 48 Hours.
-
-### GOOD LUCK

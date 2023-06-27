@@ -115,7 +115,10 @@ dist
 
 # DynamoDB Local files
 .dynamodb/
+.aws
+__pycache__
 
+env
 # TernJS port file
 .tern-port
 
