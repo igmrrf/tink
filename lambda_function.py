@@ -2,8 +2,9 @@ import json
 import logging
 import time
 import uuid
-from boto3.dynamodb.conditions import Key, Attr
+
 import boto3
+from boto3.dynamodb.conditions import Attr, Key
 
 from custom_encoder import CustomEncoder
 
@@ -34,8 +35,6 @@ def current_millisecond():
 def lambda_handler(event, context):
   logger.info(event)
   logger.info(context)
-  print(context)
-  print(event)
   httpMethod = event['httpMethod']
   path = event["path"]
   if httpMethod == getMethod and path == healthPath:
@@ -69,9 +68,9 @@ def createUser(user):
   del user["userName"]
   try:
     response = userTable.query(IndexName='userId-index', KeyConditionExpression=Key('userId').eq(user['userId']))
-    print(response['Items'])
-    if 'Items' in response:
-      return buildResponse(401, "User with username already exits")
+    
+    if len(response["Items"]):
+      return buildResponse(400, "User with username already exits")
     userTable.put_item(Item=user)
     return buildResponse(200, user)
   except:
